@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId // using proper object id for MongoDB
+  name String
+  image String?                                           // ? makes it optional or else it will crash
+  email String? @unique
+  emailVerified DateTime?
+  hashedPassword String?                                  // optional for google users
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt                           // prisma feature to automatically update for us
+  favoriteIds String[] @db.ObjectId                       // array of Ids
+  sessions Session[]
+  accounts Account[]
+}
+
+model Account {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  type String
+  provider String
+  providerAccountId String
+  refresh_token String? @db.String
+  access_token String? @db.String
+  expires_at Int?
+  token_type String?
+  scope String?
+  id_token String? @db.String
+  session_state String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade) // connects user model and account model with userId of account model and Id of user model
+
+  @@unique([provider, providerAccountId])                
+}
+
+model Session {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String @unique
+  userId String @db.ObjectId
+  expires DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)  // connects session model to user model
+}
+
+model VerificationToken {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String 
+  token String @unique
+  expires DateTime
+
+  @@unique([identifier, token])
+}
+
+model Movie {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  description String
+  videoUrl String
+  thumbnailUrl String
+  genre String
+  duration String
+}
