@@ -1,8 +1,8 @@
 import useSWR from 'swr';
 import fetcher from '@/lib/fetcher';
 
-const useBillboard = () => {
-    const { data, error, isLoading } = useSWR('/api/random', fetcher, {
+const useMovieList = () => {
+    const { data, error, isLoading } = useSWR('/api/movies', fetcher, {
         // swr options that makes disables data revalidation when user visits site
         revalidateIfStale: false,
         revalidateOnFocus: false,
@@ -16,4 +16,4 @@ const useBillboard = () => {
     }
 }
 
-export default useBillboard
+export default useMovieList
