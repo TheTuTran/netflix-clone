@@ -10,7 +10,7 @@ interface FavoriteButtonProps {
 
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
     const { mutate: mutateFavorites } = useFavorites();
-    const { data: currentUser, mutate } = useCurrentUser();
+    const { data: currentUser } = useCurrentUser();
     
     const isFavorite = useMemo(() => {
         const list = currentUser?.favoriteIds || [];
@@ -35,7 +35,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
         });
         
         mutateFavorites();
-    }, [movieId, isFavorite, currentUser, mutate, mutateFavorites]);
+    }, [movieId, isFavorite, currentUser, mutateFavorites]);
 
     // toggles icon based on if it is in list of favorites or not
     const Icon = isFavorite? AiOutlineCheck : AiOutlinePlus
