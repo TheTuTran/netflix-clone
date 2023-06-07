@@ -1,9 +1,9 @@
 import React from 'react';
 import { BsFillPlayFill } from 'react-icons/bs';
 import { BiChevronDown } from 'react-icons/bi'
-import FavoriteButton from './favorite-button';
+import FavoriteButton from './FavoriteButton';
 import { MovieInterface } from '@/types';
-import useInfoModal from '@/hooks/use-info-modal';
+import useInfoModal from '@/hooks/useInfoModal';
 
 interface MovieCardProps {
     data: MovieInterface;

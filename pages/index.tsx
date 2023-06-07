@@ -1,12 +1,12 @@
 import { getSession } from 'next-auth/react';
 import { NextPageContext } from 'next';
-import Navbar from '@/components/navbar';
-import BillBoard from '@/components/billboard';
-import MovieList from '@/components/movie-list';
-import useMovieList from '@/hooks/use-movie-list';
-import useFavorites from '@/hooks/use-favorites';
-import InfoModal from '@/components/info-modal';
-import useInfoModal from '@/hooks/use-info-modal';
+import Navbar from '@/components/Navbar';
+import BillBoard from '@/components/Billboard';
+import MovieList from '@/components/MovieList';
+import useMovieList from '@/hooks/useMovieList';
+import useFavorites from '@/hooks/useFavorites';
+import InfoModal from '@/components/InfoModal';
+import useInfoModal from '@/hooks/useInfoModal';
 
 export async function getServerSideProps(context: NextPageContext) {
 	const session = await getSession(context);
